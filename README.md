@@ -32,6 +32,22 @@ An attempt to finetune **DINOv2** on our dataset (both train, test and val):
 - Too computationally expensive (only 1 epoch trained)
 - No performance gain observed
 
+### `histogram-matching.ipynb`
+Tests **histogram matching** to standardize color distribution across slides:
+- Performance decreased, likely due to information loss from color normalization
+- **Public Kaggle score**: `0.8737`
+  
+### `double-input.ipynb` 
+ Explores a **double-input strategy** where predictoins are averaged over multiple views or patch inputs:
+ - Provded a significant boost over the baseline
+ - **Public Kaggle score**: `0.93062`
+
+### `Data_visualisation.ipynb`
+Used for exploratory data analysis:
+- Visualizes class distribution across training, validation and test sets
+- Shows slide distribution across acquisition centers
+- Helped guide modeling choices and understand domain shift
+  
 ---
 
 ## Methodology
@@ -43,17 +59,20 @@ An attempt to finetune **DINOv2** on our dataset (both train, test and val):
 
 We also experimented with:
 - Histogram matching (resulted in performance drop)
+- Double-input strategies for robustness (promising)
 - Alternative pretrained models (DenseNet, ResNet) which underperformed compared to DINOv2
 
 ---
 
 ## Results Summary
 
-| Method                   | Public Kaggle Score |
-|--------------------------|---------------------|
-| DINOv2 + NN              | 0.92881             |
-| DINOv2 + NN + TTA        | **0.93573**         |
-| DINOv2 finetuning (1 epoch) | ~0.5 (failed)    |
+| Method                          | Public Kaggle Score |
+|----------------------------------|---------------------|
+| DINOv2 + NN + TTA               | **0.93573**         |
+| Double Input + DINOv2 + NN      | 0.93062             |
+| DINOv2 + NN                     | 0.92881             |
+| Histogram Matching              | 0.8737              |
+| DINOv2 finetuning (1 epoch)     | ~0.5 (failed)       |
 
 ---
 
